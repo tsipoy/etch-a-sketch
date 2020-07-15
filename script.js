@@ -3,6 +3,8 @@ const canvas = document.querySelector('#etch-a-sketch');
 const ctx = canvas.getContext('2d');
 const shake = document.querySelector('.shake');
 const MOVE_AMOUNT = 50;
+
+
 // setup our canvas for drawing
 const { width, height } = canvas; // object destructuring (ES6)
 // random x and y between 0 and width / height
@@ -64,9 +66,16 @@ const clearCanvas = () => {
         canvas.classList.remove('shake');
     },
     { once: true }
-    );
+	);
 };
 
 // listen for arrow keys
 window.addEventListener('keydown', handleKey);
 shake.addEventListener('click', clearCanvas);
+
+// javascript for the new buttons
+const moveButtons = document.querySelectorAll('.command');
+const handleMoveButtons = event => {
+	draw({ key: event.target.dataset.command });
+};
+moveButtons.forEach(button => button.addEventListener('click', handleMoveButtons));
